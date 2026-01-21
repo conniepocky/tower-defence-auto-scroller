@@ -11,9 +11,18 @@ config_version=5
 [application]
 
 config/name="tower-defence"
+run/main_scene="uid://cje4siaycxq73"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*res://game_manager.gd"
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
+
+[global_group]
+
+player=""

@@ -1,0 +1,58 @@
+extends CharacterBody2D
+
+var speed = 50
+var health = 15
+
+func _physics_process(delta):
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+	
+	velocity.x = -speed
+	move_and_slide()
+
+func _on_area_2d_input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		take_damage()
+
+func _on_area_2d_body_entered(body):
+	print("entered body " + body.name)
+	if body.is_in_group("player"):
+		print("entered player")
+		body.take_damage(1)
+		
+		queue_free()
+
+var current_status = "" 
+
+func take_damage():
+	var type = GameManager.active_card_type
+	if type == null: return 
+	
+	var stats = GameManager.card_database[type]
+	var final_damage = stats["damage"]
+	
+	if "combo_trigger" in stats: 
+		if current_status == stats["combo_trigger"]:
+			final_damage = stats["combo_damage"]
+			print("COMBO! CRITICAL HIT!")
+						
+			current_status = "" 
+			modulate = Color.WHITE
+
+	if stats["status_effect"] != "":
+		current_status = stats["status_effect"]
+		_update_status_visuals()
+	
+	health -= final_damage
+	print("Enemy took ", final_damage, " damage. Remaining: ", health)
+	
+	if health <= 0:
+		queue_free()
+		
+	GameManager.active_card_type = null
+
+func _update_status_visuals():
+	if current_status == "oiled":
+		modulate = Color.DIM_GRAY
+	elif current_status == "wet":
+		modulate = Color.CYAN
