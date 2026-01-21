@@ -1,10 +1,12 @@
-[gd_scene load_steps=15 format=4 uid="uid://cje4siaycxq73"]
+[gd_scene load_steps=17 format=4 uid="uid://cje4siaycxq73"]
 
 [ext_resource type="Texture2D" uid="uid://ceac6m1iurrfk" path="res://platforms.png" id="1_lquwl"]
 [ext_resource type="Script" uid="uid://37it3n683gea" path="res://player.gd" id="2_h2yge"]
 [ext_resource type="Texture2D" uid="uid://c23nmjy3rd7cu" path="res://merlin_.png" id="4_lquwl"]
 [ext_resource type="Script" uid="uid://cgh8g6xko4f57" path="res://spawner.gd" id="5_lquwl"]
+[ext_resource type="FontFile" uid="uid://dpglrsp33l377" path="res://bitbybit_ [Font].ttf" id="6_5vw27"]
 [ext_resource type="Script" uid="uid://cs1h7waeesylw" path="res://card_manager.gd" id="6_7mycd"]
+[ext_resource type="AudioStream" uid="uid://dduwqm5p2sid3" path="res://sound/01_Power down_v1.wav" id="6_272bh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mycd"]
 texture = ExtResource("1_lquwl")
@@ -94,6 +96,7 @@ tile_map_data = PackedByteArray("AAACAAIAAAARAAcAAAD5////AQABAAMAAAD6////AQACAAM
 tile_set = SubResource("TileSet_h2yge")
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
+process_mode = 3
 script = ExtResource("2_h2yge")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
@@ -121,23 +124,32 @@ frame_progress = 1.0
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
-offset_left = 231.0
-offset_top = 554.0
-offset_right = 313.0
-offset_bottom = 594.0
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -81.0
+offset_right = 1.0
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 0
 scale = Vector2(2.9554567, 2.4406908)
 script = ExtResource("6_7mycd")
 
 [node name="Button" type="Button" parent="CanvasLayer/HBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("6_5vw27")
 text = "Card 1"
 
 [node name="Button3" type="Button" parent="CanvasLayer/HBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("6_5vw27")
 text = "Card 1"
 
 [node name="Button2" type="Button" parent="CanvasLayer/HBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("6_5vw27")
 text = "Card 1"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer"]
@@ -151,9 +163,93 @@ unique_name_in_owner = true
 modulate = Color(0.8771302, 0.44232845, 0.9942425, 1)
 texture_filter = 1
 layout_mode = 2
+theme_override_fonts/font = ExtResource("6_5vw27")
 text = "Health: 10"
 
 [node name="ActiveCardLabel" type="Label" parent="CanvasLayer/HBoxContainer2" groups=["card_label"]]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_fonts/font = ExtResource("6_5vw27")
 text = "Active Card: None"
+
+[node name="PlayerHurtSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_272bh")
+
+[node name="StartLayer" type="CanvasLayer" parent="."]
+
+[node name="StartScreen" type="ColorRect" parent="StartLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.0230381, 1.040947)
+color = Color(0.29402778, 0.29402778, 0.29402775, 1)
+
+[node name="Label" type="Label" parent="StartLayer/StartScreen"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 24.0
+grow_horizontal = 2
+scale = Vector2(6.6872425, 6.366303)
+theme_override_fonts/font = ExtResource("6_5vw27")
+text = "WELCOME"
+
+[node name="Label2" type="Label" parent="StartLayer/StartScreen"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.5
+offset_top = -13.5
+offset_right = 44.5
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(5.701163, 5.388457)
+theme_override_fonts/font = ExtResource("6_5vw27")
+theme_override_font_sizes/font_size = 8
+text = "Press space
+to play"
+
+[node name="GameOverLayer" type="CanvasLayer" parent="."]
+process_mode = 2
+
+[node name="GameOverScreen" type="ColorRect" parent="GameOverLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(29.007545, 16.950323)
+color = Color(0.2524562, 0.25946972, 0.25946972, 1)
+
+[node name="Button" type="Button" parent="GameOverLayer/GameOverScreen"]
+modulate = Color(0.22745098, 0.7882353, 0.99607843, 1)
+texture_filter = 1
+layout_mode = 0
+offset_left = 5.4123855
+offset_top = 23.775358
+offset_right = 151.41238
+offset_bottom = 55.77536
+scale = Vector2(0.19738986, 0.31375614)
+theme_override_fonts/font = ExtResource("6_5vw27")
+text = "Try Again"
+
+[node name="Label" type="Label" parent="GameOverLayer/GameOverScreen"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 0.51710683
+offset_top = 2.241845
+offset_right = 154.5171
+offset_bottom = 26.241844
+scale = Vector2(0.25264803, 0.58789045)
+theme_override_fonts/font = ExtResource("6_5vw27")
+text = "GAME OVER"
+
+[connection signal="pressed" from="GameOverLayer/GameOverScreen/Button" to="Player" method="_on_button_pressed"]

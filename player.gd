@@ -10,21 +10,20 @@ var staff_scene = preload("res://staff.tscn")
 func take_damage(amount):
 	health -= amount
 	update_health_ui()
-	print("Ouch! Health is now: ", health)
+	
+	get_node("../PlayerHurtSFX").play()
 	
 	if health <= 0:
 		die()
 
 func die():
-	print("Game Over!")
-	get_tree().reload_current_scene()
-
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
+	game_over_screen.visible = true
+	get_tree().paused = true
+	
 func update_health_ui():
 	%HealthLabel.text = "Health: " + str(health)
-
-func _process(delta: float):
-	velocity.x += SPEED * delta
-	move_and_slide()
 
 func throw_staff():
 	print("throwing staff")
@@ -46,3 +45,36 @@ func _physics_process(delta: float) -> void:
 	velocity.x = SPEED
 	
 	move_and_slide()
+
+# code for game over and start screen + initial setup
+
+@onready var game_over_screen = $"../GameOverLayer/GameOverScreen"
+@onready var start_screen = $"../StartLayer/StartScreen"
+
+func _ready():
+	game_over_screen.visible = false
+	start_screen.visible = true
+	
+	get_tree().paused = true
+	
+func start_game():
+	start_screen.visible = false
+	get_tree().paused = false
+	
+# try again button on game over screen
+	
+func _on_button_pressed():
+	get_tree().paused = false
+	get_tree().reload_current_scene()
+	
+# autoscrolling and start screen setup
+	
+func _process(delta):	
+	if start_screen.visible:
+		if Input.is_action_just_pressed("ui_accept"): # spacebar
+			start_screen.visible = false
+			get_tree().paused = false
+	
+	if not get_tree().paused:
+		velocity.x += SPEED * delta
+		move_and_slide()

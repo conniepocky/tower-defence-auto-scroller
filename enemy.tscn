@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://bbjd4rmnati4b"]
+[gd_scene load_steps=11 format=3 uid="uid://bbjd4rmnati4b"]
 
 [ext_resource type="Script" uid="uid://vao7llbrkhre" path="res://character_body_2d.gd" id="1_4gyqm"]
 [ext_resource type="Texture2D" uid="uid://chsfwve43idcy" path="res://lancelot_.png" id="2_4gyqm"]
+[ext_resource type="AudioStream" uid="uid://dhfv6w3wjcexe" path="res://sound/01_Hurt_v1.wav" id="3_qi2p4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qi2p4"]
 size = Vector2(43, 45)
@@ -66,6 +67,10 @@ position = Vector2(-3, -1.0000019)
 scale = Vector2(2.046875, 1.9571428)
 sprite_frames = SubResource("SpriteFrames_wujgv")
 autoplay = "default"
+
+[node name="EnemyHurtSFX" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_qi2p4")
 
 [connection signal="body_entered" from="CharacterBody2D/Area2D" to="CharacterBody2D" method="_on_area_2d_body_entered"]
 [connection signal="input_event" from="CharacterBody2D/Area2D" to="CharacterBody2D" method="_on_area_2d_input_event"]

@@ -34,6 +34,8 @@ func take_damage():
 	var stats = GameManager.card_database[type]
 	var final_damage = stats["damage"]
 	
+	get_node("../EnemyHurtSFX").play()
+	
 	if "combo_trigger" in stats: 
 		if current_status == stats["combo_trigger"]:
 			final_damage = stats["combo_damage"]
