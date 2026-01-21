@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdfm4t4f48r53"
-path="res://.godot/imported/generic_platformer_tiles.png-b0460599ec9895deeea2dfb5b0adf4bf.ctex"
+uid="uid://ceac6m1iurrfk"
+path="res://.godot/imported/platforms.png-d77465605ae903b67cbaa418ee6e1694.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://generic_platformer_tiles.png"
-dest_files=["res://.godot/imported/generic_platformer_tiles.png-b0460599ec9895deeea2dfb5b0adf4bf.ctex"]
+source_file="res://platforms.png"
+dest_files=["res://.godot/imported/platforms.png-d77465605ae903b67cbaa418ee6e1694.ctex"]
 
 [params]
 

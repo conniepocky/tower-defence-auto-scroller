@@ -3,6 +3,8 @@ extends CharacterBody2D
 var speed = 50
 var health = 15
 
+var current_status = "" 
+
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -11,6 +13,9 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _on_area_2d_input_event(viewport, event, shape_idx):
+	if GameManager.active_card_type == "staff":
+		return
+		
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		take_damage()
 
@@ -21,8 +26,6 @@ func _on_area_2d_body_entered(body):
 		body.take_damage(1)
 		
 		queue_free()
-
-var current_status = "" 
 
 func take_damage():
 	var type = GameManager.active_card_type
@@ -50,6 +53,11 @@ func take_damage():
 		queue_free()
 		
 	GameManager.active_card_type = null
+	
+	var label = get_tree().get_first_node_in_group("card_label")
+	
+	if label:
+		label.text = "Active Card: None"
 
 func _update_status_visuals():
 	if current_status == "oiled":

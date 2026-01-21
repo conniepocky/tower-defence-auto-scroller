@@ -1,6 +1,6 @@
 extends HBoxContainer
 
-var deck = ["oil", "oil", "fire", "fire", "water", "lightning"]
+var deck = ["oil", "staff", "fire", "water", "lightning"]
 
 func _ready():
 	for button in get_children():

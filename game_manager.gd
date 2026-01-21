@@ -27,8 +27,24 @@ var card_database = {
 		"combo_trigger": "wet",
 		"combo_damage": 20,
 		"color": Color.YELLOW
+	},
+	"staff": {  
+		"damage": 25,
+		"status_effect": "",
+		"color": Color.CYAN,
+		"type": "projectile" 
 	}
 }
 
 func select_card(type):
+	if type == "staff":
+		var player = get_tree().get_first_node_in_group("player")
+		if player:
+			player.throw_staff()
+	
 	active_card_type = type
+	
+	var label = get_tree().get_first_node_in_group("card_label")
+	
+	if label:
+		label.text = "Active Card: " + type.capitalize()
