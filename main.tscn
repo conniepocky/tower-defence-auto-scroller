@@ -1,13 +1,14 @@
-[gd_scene load_steps=19 format=3 uid="uid://cje4siaycxq73"]
+[gd_scene load_steps=20 format=3 uid="uid://cje4siaycxq73"]
 
+[ext_resource type="PackedScene" uid="uid://qp5b68lblvj7" path="res://puzzle.tscn" id="1_4c57u"]
 [ext_resource type="Texture2D" uid="uid://ceac6m1iurrfk" path="res://platforms.png" id="1_lquwl"]
-[ext_resource type="Script" uid="uid://37it3n683gea" path="res://player.gd" id="2_h2yge"]
-[ext_resource type="Script" uid="uid://bkimxg6ljruy2" path="res://map_generator.gd" id="2_kek77"]
+[ext_resource type="Script" uid="uid://37it3n683gea" path="res://scripts/player.gd" id="2_h2yge"]
+[ext_resource type="Script" uid="uid://bkimxg6ljruy2" path="res://scripts/map_generator.gd" id="2_kek77"]
 [ext_resource type="Texture2D" uid="uid://c23nmjy3rd7cu" path="res://merlin_.png" id="4_lquwl"]
 [ext_resource type="Texture2D" uid="uid://xu7kfr3d3i7w" path="res://hurt.png" id="5_5vw27"]
-[ext_resource type="Script" uid="uid://cgh8g6xko4f57" path="res://spawner.gd" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://cgh8g6xko4f57" path="res://scripts/spawner.gd" id="5_lquwl"]
 [ext_resource type="FontFile" uid="uid://dpglrsp33l377" path="res://bitbybit_ [Font].ttf" id="6_5vw27"]
-[ext_resource type="Script" uid="uid://cs1h7waeesylw" path="res://card_manager.gd" id="6_7mycd"]
+[ext_resource type="Script" uid="uid://cs1h7waeesylw" path="res://scripts/card_manager.gd" id="6_7mycd"]
 [ext_resource type="AudioStream" uid="uid://dduwqm5p2sid3" path="res://sound/01_Power down_v1.wav" id="6_272bh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mycd"]
@@ -92,6 +93,9 @@ animations = [{
 
 [node name="Node2D" type="Node2D"]
 
+[node name="puzzle" parent="." instance=ExtResource("1_4c57u")]
+visible = false
+
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 texture_filter = 1
 position = Vector2(24, 0)
@@ -99,9 +103,10 @@ tile_map_data = PackedByteArray(0, 0, 2, 0, 2, 0, 0, 0, 17, 0, 7, 0, 0, 0)
 tile_set = SubResource("TileSet_h2yge")
 script = ExtResource("2_kek77")
 
-[node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
+[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("puzzle") groups=["player"]]
 process_mode = 3
 script = ExtResource("2_h2yge")
+puzzle = NodePath("../puzzle")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(-188, -30)

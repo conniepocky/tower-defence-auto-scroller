@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://bbjd4rmnati4b"]
 
-[ext_resource type="Script" uid="uid://vao7llbrkhre" path="res://character_body_2d.gd" id="1_4gyqm"]
+[ext_resource type="Script" uid="uid://vao7llbrkhre" path="res://scripts/character_body_2d.gd" id="1_4gyqm"]
 [ext_resource type="Texture2D" uid="uid://chsfwve43idcy" path="res://lancelot_.png" id="2_4gyqm"]
 [ext_resource type="AudioStream" uid="uid://dhfv6w3wjcexe" path="res://sound/01_Hurt_v1.wav" id="3_qi2p4"]
 
@@ -49,6 +49,7 @@ animations = [{
 [node name="Node2D" type="Node2D"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["enemy"]]
+scale = Vector2(0.596, 0.603)
 script = ExtResource("1_4gyqm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]

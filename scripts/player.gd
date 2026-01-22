@@ -7,6 +7,8 @@ var health = 10
 
 var staff_scene = preload("res://staff.tscn")
 
+@export var puzzle : Node2D
+
 func show_icon():
 	var hurt_icon = %HurtIcon
 	
