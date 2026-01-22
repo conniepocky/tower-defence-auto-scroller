@@ -49,7 +49,6 @@ func take_damage():
 		_update_status_visuals()
 	
 	health -= final_damage
-	print("Enemy took ", final_damage, " damage. Remaining: ", health)
 	
 	if health <= 0:
 		queue_free()

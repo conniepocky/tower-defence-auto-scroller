@@ -7,9 +7,25 @@ var health = 10
 
 var staff_scene = preload("res://staff.tscn")
 
+func show_icon():
+	var hurt_icon = %HurtIcon
+	
+	hurt_icon.visible = true
+	hurt_icon.modulate.a = 1.0
+	
+	var tween = create_tween()
+	
+	tween.tween_interval(0.2)
+	
+	tween.tween_property(hurt_icon, "modulate:a", 0.0, 0.5)
+	
+	tween.tween_callback(hurt_icon.hide)
+
 func take_damage(amount):
 	health -= amount
 	update_health_ui()
+	
+	show_icon()
 	
 	get_node("../PlayerHurtSFX").play()
 	
@@ -29,7 +45,7 @@ func throw_staff():
 	print("throwing staff")
 	var new_staff = staff_scene.instantiate()
 	
-	new_staff.position = position + Vector2(-25, 0)
+	new_staff.position = position + Vector2(-75, 0)
 	
 	get_parent().add_child(new_staff)
 
