@@ -8,6 +8,18 @@ var health = 10
 var staff_scene = preload("res://staff.tscn")
 
 @export var puzzle : Node2D
+@onready var bubble_sprite = $BubbleSprite
+
+var bubble_active = false
+
+func activate_bubble():
+	bubble_active = true
+	bubble_sprite.visible = true
+
+func pop_bubble():
+	get_node("../BubbleSFX").play()
+	bubble_sprite.visible = false
+	bubble_active = false
 
 func show_icon():
 	var hurt_icon = %HurtIcon
@@ -30,6 +42,10 @@ func heal():
 	update_health_ui()
 
 func take_damage(amount):
+	if bubble_active:
+		pop_bubble()
+		return
+	
 	health -= amount
 	update_health_ui()
 	
@@ -53,7 +69,7 @@ func throw_staff():
 	print("throwing staff")
 	var new_staff = staff_scene.instantiate()
 	
-	new_staff.position = position + Vector2(-75, 0)
+	new_staff.position = position + Vector2(-115, 0)
 	
 	get_parent().add_child(new_staff)
 

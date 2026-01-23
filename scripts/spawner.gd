@@ -2,7 +2,7 @@ extends Marker2D
 
 var enemy_scene = preload("res://Enemy.tscn")
 var healer_scene = preload("res://healer.tscn")
-var healer_spawn_interval = 3.0
+var healer_spawn_interval = 9.0
 var enemy_spawn_interval = 2.0
 
 func _ready():

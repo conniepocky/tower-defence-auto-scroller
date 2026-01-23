@@ -1,6 +1,6 @@
 extends HBoxContainer
 
-var deck = ["oil", "staff", "fire", "water", "lightning"]
+var deck = ["oil", "staff", "fire", "water", "lightning", "bubble"]
 
 func _ready():
 	for button in get_children():
@@ -21,7 +21,13 @@ func _on_card_pressed(button):
 	_reload_card(button)
 
 func _reload_card(button):
+	var player = get_tree().get_first_node_in_group("player")
 	var new_card = deck.pick_random()
+	
+	if player:
+		while new_card == "bubble" and player.bubble_active:
+			new_card = deck.pick_random()
+	
 	button.text = new_card.capitalize()
 	button.disabled = false
 

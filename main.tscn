@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cje4siaycxq73"]
+[gd_scene load_steps=22 format=3 uid="uid://cje4siaycxq73"]
 
 [ext_resource type="PackedScene" uid="uid://qp5b68lblvj7" path="res://puzzle.tscn" id="1_4c57u"]
 [ext_resource type="Texture2D" uid="uid://ceac6m1iurrfk" path="res://platforms.png" id="1_lquwl"]
@@ -10,6 +10,8 @@
 [ext_resource type="FontFile" uid="uid://dpglrsp33l377" path="res://bitbybit_ [Font].ttf" id="6_5vw27"]
 [ext_resource type="Script" uid="uid://cs1h7waeesylw" path="res://scripts/card_manager.gd" id="6_7mycd"]
 [ext_resource type="AudioStream" uid="uid://dduwqm5p2sid3" path="res://sound/01_Power down_v1.wav" id="6_272bh"]
+[ext_resource type="Texture2D" uid="uid://b6iuagxu2w8i2" path="res://images/bubble.png" id="8_efxa6"]
+[ext_resource type="AudioStream" uid="uid://cesg3gmxtiquk" path="res://sound/bubble-pop-06-351337.mp3" id="12_dg77c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mycd"]
 texture = ExtResource("1_lquwl")
@@ -138,6 +140,12 @@ texture_filter = 1
 position = Vector2(-170, -45)
 scale = Vector2(0.7459215, 0.7860161)
 texture = ExtResource("5_5vw27")
+
+[node name="BubbleSprite" type="Sprite2D" parent="Player"]
+visible = false
+texture_filter = 1
+position = Vector2(-187, -30)
+texture = ExtResource("8_efxa6")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -283,5 +291,8 @@ grow_horizontal = 2
 scale = Vector2(0.12331581, 0.27169544)
 theme_override_fonts/font = ExtResource("6_5vw27")
 text = "GAME OVER"
+
+[node name="BubbleSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_dg77c")
 
 [connection signal="pressed" from="GameOverLayer/GameOverScreen/Button" to="Player" method="_on_button_pressed"]

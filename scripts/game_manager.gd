@@ -33,14 +33,25 @@ var card_database = {
 		"status_effect": "",
 		"color": Color.CYAN,
 		"type": "projectile" 
+	},
+	"bubble": {
+		"damage": 0,
+		"status_effect": "",
+		"color": Color.HOT_PINK,
+		"type": "bubble"
 	}
 }
 
 func select_card(type):
+	var player = get_tree().get_first_node_in_group("player")
+	
 	if type == "staff":
-		var player = get_tree().get_first_node_in_group("player")
 		if player:
 			player.throw_staff()
+			
+	if type == "bubble":
+		if player:
+			player.activate_bubble()
 	
 	active_card_type = type
 	
