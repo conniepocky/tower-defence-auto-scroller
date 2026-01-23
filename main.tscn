@@ -94,7 +94,6 @@ animations = [{
 [node name="Node2D" type="Node2D"]
 
 [node name="puzzle" parent="." instance=ExtResource("1_4c57u")]
-visible = false
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 texture_filter = 1
@@ -119,6 +118,7 @@ drag_vertical_offset = -1.0
 script = SubResource("GDScript_lquwl")
 
 [node name="Marker2D" type="Marker2D" parent="Player/Camera2D"]
+process_mode = 1
 position = Vector2(125, -43)
 script = ExtResource("5_lquwl")
 
@@ -239,6 +239,7 @@ horizontal_alignment = 1
 
 [node name="GameOverLayer" type="CanvasLayer" parent="."]
 process_mode = 2
+visible = false
 
 [node name="GameOverScreen" type="ColorRect" parent="GameOverLayer"]
 anchors_preset = 15

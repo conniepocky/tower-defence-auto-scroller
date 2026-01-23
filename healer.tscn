@@ -1,0 +1,79 @@
+[gd_scene load_steps=11 format=3 uid="uid://b8x1kqc55focr"]
+
+[ext_resource type="Script" uid="uid://fo1ftykwe6me" path="res://scripts/healer.gd" id="1_0c8pn"]
+[ext_resource type="Texture2D" uid="uid://b1mhskur7yvps" path="res://ladyOfTheLake_.png" id="1_ds2si"]
+[ext_resource type="Texture2D" uid="uid://drxlbdfvqus2f" path="res://images/love.png" id="3_ghede"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0c8pn"]
+atlas = ExtResource("1_ds2si")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ghede"]
+atlas = ExtResource("1_ds2si")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jqhlo"]
+atlas = ExtResource("1_ds2si")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1rpo"]
+atlas = ExtResource("1_ds2si")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_na2tm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0c8pn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ghede")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jqhlo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1rpo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0c8pn"]
+size = Vector2(25, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ghede"]
+size = Vector2(46, 45.5)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+input_pickable = true
+script = ExtResource("1_0c8pn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+texture_filter = 1
+scale = Vector2(1.5004667, 1.4718432)
+sprite_frames = SubResource("SpriteFrames_na2tm")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0.5, 3)
+shape = SubResource("RectangleShape2D_0c8pn")
+
+[node name="HurtIcon" type="Sprite2D" parent="CharacterBody2D"]
+unique_name_in_owner = true
+texture_filter = 1
+position = Vector2(-16, -10)
+scale = Vector2(0.78, 0.822)
+texture = ExtResource("3_ghede")
+
+[node name="Area2D" type="Area2D" parent="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D"]
+position = Vector2(-2, -3.75)
+shape = SubResource("RectangleShape2D_ghede")
+
+[connection signal="input_event" from="CharacterBody2D" to="CharacterBody2D" method="_on_input_event"]
+[connection signal="body_entered" from="CharacterBody2D/Area2D" to="CharacterBody2D" method="_on_area_2d_body_entered"]

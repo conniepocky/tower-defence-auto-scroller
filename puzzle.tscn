@@ -1,30 +1,55 @@
-[gd_scene load_steps=2 format=3 uid="uid://qp5b68lblvj7"]
+[gd_scene load_steps=5 format=3 uid="uid://qp5b68lblvj7"]
 
 [ext_resource type="Script" uid="uid://d3jw5jq7adma6" path="res://scripts/puzzle.gd" id="1_03ub4"]
+[ext_resource type="FontFile" uid="uid://dpglrsp33l377" path="res://bitbybit_ [Font].ttf" id="2_77j1r"]
+[ext_resource type="AudioStream" uid="uid://bpswkocy4yo0" path="res://sound/03_Power up_v1.wav" id="3_hgotr"]
+[ext_resource type="AudioStream" uid="uid://m6wkkafyor1h" path="res://sound/04_Death_v3.wav" id="4_q2gwe"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" groups=["puzzle"]]
 process_mode = 3
 script = ExtResource("1_03ub4")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 100
 visible = false
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 anchors_preset = -1
-anchor_right = 1.014
-anchor_bottom = 1.024
-offset_right = -608.96
-offset_bottom = -328.64
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -600.48346
+offset_bottom = -320.5225
 scale = Vector2(16.221052, 9.220441)
-color = Color(1, 0.7294118, 1, 1)
+color = Color(0, 0, 0, 1)
 
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/ColorRect"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 39.454903
+offset_bottom = 38.935234
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ColorRect/CenterContainer"]
 layout_mode = 2
 
 [node name="ArrowRow" type="HBoxContainer" parent="CanvasLayer/ColorRect/CenterContainer/VBoxContainer"]
 layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ColorRect"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -6.8737783
+offset_top = 0.108454704
+offset_right = 36.12622
+offset_bottom = 24.108456
+grow_horizontal = 2
+scale = Vector2(0.32317072, 0.5674121)
+theme_override_fonts/font = ExtResource("2_77j1r")
+text = "3.0"
+
+[node name="SuccessSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_hgotr")
+
+[node name="FailSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_q2gwe")

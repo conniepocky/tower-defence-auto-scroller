@@ -22,6 +22,12 @@ func show_icon():
 	tween.tween_property(hurt_icon, "modulate:a", 0.0, 0.5)
 	
 	tween.tween_callback(hurt_icon.hide)
+	
+func heal():
+	print(health)
+	health += 1
+	print(health)
+	update_health_ui()
 
 func take_damage(amount):
 	health -= amount

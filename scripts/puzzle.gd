@@ -13,8 +13,26 @@ signal puzzle_failed
 
 @onready var ui_layer = $CanvasLayer 
 
+@onready var timer_label = $CanvasLayer/ColorRect/Label
+var current_time = 2.5
+
+func _process(delta):
+	if ui_layer.visible:
+		current_time -= delta
+
+		timer_label.text = str(ceil(current_time))
+		
+		if current_time < 2:
+			timer_label.modulate = Color.RED
+		else:
+			timer_label.modulate = Color.WHITE
+			
+		if current_time <= 0:
+			fail()
+
 func start_puzzle():
 	ui_layer.visible = true  
+	current_time = 2.5
 	get_tree().paused = true
 	generate_sequence()
 
@@ -81,10 +99,11 @@ func check_input(event):
 		fail()
 
 func win():
-	print("Puzzle Solved!")
+	get_node("SuccessSFX").play()
 	puzzle_solved.emit() 
 	close()
 
 func fail():
+	get_node("FailSFX").play()
 	puzzle_failed.emit()
 	close()
