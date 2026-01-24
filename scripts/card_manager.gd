@@ -7,13 +7,6 @@ func _ready():
 		card.pressed.connect(_on_card_pressed.bind(card))
 		_reload_card(card) 
 
-func get_type_from_path(path):
-	var filename = path.get_file()
-
-	var clean_name = filename.get_basename()
-
-	return clean_name.replace("_card", "")
-
 func _on_card_pressed(card):
 	var type = card.get_meta("type")
 	
@@ -31,9 +24,11 @@ func _reload_card(card):
 	var player = get_tree().get_first_node_in_group("player")
 	var new_card = deck.pick_random()
 	
-	if player:
-		while new_card == "bubble" and player.bubble_active:
+	if player and "bubble_active" in player:
+		var retries = 0
+		while new_card == "bubble" and player.bubble_active and retries < 10:
 			new_card = deck.pick_random()
+			retries += 1
 	
 	card.set_meta("type", new_card)
 	
