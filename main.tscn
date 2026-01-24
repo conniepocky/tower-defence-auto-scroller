@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cje4siaycxq73"]
+[gd_scene load_steps=24 format=3 uid="uid://cje4siaycxq73"]
 
 [ext_resource type="PackedScene" uid="uid://qp5b68lblvj7" path="res://puzzle.tscn" id="1_4c57u"]
 [ext_resource type="Texture2D" uid="uid://ceac6m1iurrfk" path="res://platforms.png" id="1_lquwl"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://cs1h7waeesylw" path="res://scripts/card_manager.gd" id="6_7mycd"]
 [ext_resource type="AudioStream" uid="uid://dduwqm5p2sid3" path="res://sound/01_Power down_v1.wav" id="6_272bh"]
 [ext_resource type="Texture2D" uid="uid://b6iuagxu2w8i2" path="res://images/bubble.png" id="8_efxa6"]
+[ext_resource type="Texture2D" uid="uid://cvwuqrcaiu7v7" path="res://images/cards/bubble_card.png" id="10_w48qg"]
+[ext_resource type="Texture2D" uid="uid://b144hfnuduhd8" path="res://images/cards/card.png" id="10_ycdy4"]
 [ext_resource type="AudioStream" uid="uid://cesg3gmxtiquk" path="res://sound/bubble-pop-06-351337.mp3" id="12_dg77c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mycd"]
@@ -150,31 +152,34 @@ texture = ExtResource("8_efxa6")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
-anchors_preset = 2
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = -55.0
-offset_right = 297.0
-offset_bottom = -23.0
+offset_left = -114.0
+offset_top = -99.0
+offset_right = 182.0
+offset_bottom = -49.0
+grow_horizontal = 2
 grow_vertical = 0
-scale = Vector2(1.0978028, 1.6096096)
+scale = Vector2(2, 2)
 script = ExtResource("6_7mycd")
 
-[node name="Button" type="Button" parent="CanvasLayer/HBoxContainer"]
+[node name="Card" type="TextureButton" parent="CanvasLayer/HBoxContainer"]
+texture_filter = 3
 layout_mode = 2
-theme_override_fonts/font = ExtResource("6_5vw27")
-text = "Card 1"
+texture_normal = ExtResource("10_w48qg")
 
-[node name="Button3" type="Button" parent="CanvasLayer/HBoxContainer"]
+[node name="Card2" type="TextureButton" parent="CanvasLayer/HBoxContainer"]
+texture_filter = 1
 layout_mode = 2
-theme_override_fonts/font = ExtResource("6_5vw27")
-text = "Card 1"
+texture_normal = ExtResource("10_ycdy4")
 
-[node name="Button2" type="Button" parent="CanvasLayer/HBoxContainer"]
+[node name="Card3" type="TextureButton" parent="CanvasLayer/HBoxContainer"]
+texture_filter = 1
 layout_mode = 2
-theme_override_fonts/font = ExtResource("6_5vw27")
-text = "Card 1"
+texture_normal = ExtResource("10_ycdy4")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer"]
 texture_filter = 1
@@ -202,6 +207,7 @@ text = "Active Card: None"
 stream = ExtResource("6_272bh")
 
 [node name="StartLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="StartScreen" type="ColorRect" parent="StartLayer"]
 anchors_preset = 15

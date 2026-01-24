@@ -13,6 +13,7 @@ var staff_scene = preload("res://staff.tscn")
 var bubble_active = false
 
 func activate_bubble():
+	get_node("../BubbleSFX").play()
 	bubble_active = true
 	bubble_sprite.visible = true
 

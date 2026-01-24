@@ -7,11 +7,13 @@ var card_database = {
 	"oil": {
 		"damage": 0,
 		"status_effect": "oiled",
+		"image": "res://images/cards/oil_card.png",
 		"color": Color.BLACK
 	},
 	"fire": {
 		"damage": 5, 
 		"status_effect": "burn",
+		"image": "res://images/cards/fire_card.png",
 		"combo_trigger": "oiled", 
 		"combo_damage": 25,      
 		"color": Color.ORANGE
@@ -19,11 +21,13 @@ var card_database = {
 	"water": {
 		"damage": 2,
 		"status_effect": "wet",
+		"image": "res://images/cards/water_card.png",
 		"color": Color.BLUE
 	},
 	"lightning": {
 		"damage": 5,
 		"status_effect": "shock",
+		"image": "res://images/cards/lightning_card.png",
 		"combo_trigger": "wet",
 		"combo_damage": 20,
 		"color": Color.YELLOW
@@ -31,12 +35,14 @@ var card_database = {
 	"staff": {  
 		"damage": 25,
 		"status_effect": "",
+		"image": "res://images/cards/staff_card.png",
 		"color": Color.CYAN,
 		"type": "projectile" 
 	},
 	"bubble": {
 		"damage": 0,
 		"status_effect": "",
+		"image": "res://images/cards/bubble_card.png",
 		"color": Color.HOT_PINK,
 		"type": "bubble"
 	}
