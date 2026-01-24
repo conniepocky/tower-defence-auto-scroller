@@ -12,8 +12,8 @@ var card_database = {
 	},
 	"fire": {
 		"damage": 5, 
-		"status_effect": "burn",
 		"image": "res://images/cards/fire_card.png",
+		"status_effect": "",
 		"combo_trigger": "oiled", 
 		"combo_damage": 25,      
 		"color": Color.ORANGE
@@ -26,8 +26,8 @@ var card_database = {
 	},
 	"lightning": {
 		"damage": 5,
-		"status_effect": "shock",
 		"image": "res://images/cards/lightning_card.png",
+		"status_effect": "",
 		"combo_trigger": "wet",
 		"combo_damage": 20,
 		"color": Color.YELLOW

@@ -37,9 +37,10 @@ func take_damage():
 	get_node("../EnemyHurtSFX").play()
 	
 	if "combo_trigger" in stats: 
+		print(type)
+		print(current_status)
 		if current_status == stats["combo_trigger"]:
 			final_damage = stats["combo_damage"]
-			print("COMBO! CRITICAL HIT!")
 						
 			current_status = "" 
 			modulate = Color.WHITE

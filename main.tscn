@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cje4siaycxq73"]
+[gd_scene load_steps=29 format=3 uid="uid://cje4siaycxq73"]
 
 [ext_resource type="PackedScene" uid="uid://qp5b68lblvj7" path="res://puzzle.tscn" id="1_4c57u"]
 [ext_resource type="Texture2D" uid="uid://ceac6m1iurrfk" path="res://platforms.png" id="1_lquwl"]
@@ -14,6 +14,10 @@
 [ext_resource type="Texture2D" uid="uid://cvwuqrcaiu7v7" path="res://images/cards/bubble_card.png" id="10_w48qg"]
 [ext_resource type="Texture2D" uid="uid://b144hfnuduhd8" path="res://images/cards/card.png" id="10_ycdy4"]
 [ext_resource type="AudioStream" uid="uid://cesg3gmxtiquk" path="res://sound/bubble-pop-06-351337.mp3" id="12_dg77c"]
+[ext_resource type="Texture2D" uid="uid://lq7k8suf88ud" path="res://images/background/1.Backround.png" id="15_yaehf"]
+[ext_resource type="Texture2D" uid="uid://c5xw352o4bk3k" path="res://images/background/2.Trees_back.png" id="16_074og"]
+[ext_resource type="Texture2D" uid="uid://df2we04j707oe" path="res://images/background/3.Trees_front.png" id="17_cegan"]
+[ext_resource type="Texture2D" uid="uid://dh56vu8nltmrw" path="res://images/background/4.Ground.png" id="18_074og"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mycd"]
 texture = ExtResource("1_lquwl")
@@ -95,6 +99,8 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_074og"]
+
 [node name="Node2D" type="Node2D"]
 
 [node name="puzzle" parent="." instance=ExtResource("1_4c57u")]
@@ -108,6 +114,7 @@ script = ExtResource("2_kek77")
 
 [node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("puzzle") groups=["player"]]
 process_mode = 3
+position = Vector2(-3, 197)
 script = ExtResource("2_h2yge")
 puzzle = NodePath("../puzzle")
 
@@ -116,6 +123,7 @@ position = Vector2(-188, -30)
 shape = SubResource("RectangleShape2D_h2yge")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(1, -23)
 zoom = Vector2(2, 2)
 drag_horizontal_offset = -0.9
 drag_vertical_offset = -1.0
@@ -207,7 +215,6 @@ text = "Active Card: None"
 stream = ExtResource("6_272bh")
 
 [node name="StartLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="StartScreen" type="ColorRect" parent="StartLayer"]
 anchors_preset = 15
@@ -300,5 +307,52 @@ text = "GAME OVER"
 
 [node name="BubbleSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("12_dg77c")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(320, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_filter = 1
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("15_yaehf")
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(320, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+texture_filter = 1
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("16_074og")
+centered = false
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(320, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+texture_filter = 1
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("17_cegan")
+centered = false
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(0, 7)
+motion_mirroring = Vector2(320, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+texture_filter = 1
+position = Vector2(1, -54.000004)
+scale = Vector2(1.5293398, 1.7714233)
+texture = ExtResource("18_074og")
+centered = false
+
+[node name="GroundLayer" type="StaticBody2D" parent="."]
+position = Vector2(2, 68)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundLayer"]
+position = Vector2(5, 147)
+shape = SubResource("WorldBoundaryShape2D_074og")
 
 [connection signal="pressed" from="GameOverLayer/GameOverScreen/Button" to="Player" method="_on_button_pressed"]

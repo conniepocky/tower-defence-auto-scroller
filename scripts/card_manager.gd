@@ -26,7 +26,7 @@ func _reload_card(card):
 	
 	if player and "bubble_active" in player:
 		var retries = 0
-		while new_card == "bubble" and player.bubble_active and retries < 10:
+		while new_card == "bubble" and player.bubble_active and retries < 10: # prevent infinite loop
 			new_card = deck.pick_random()
 			retries += 1
 	
