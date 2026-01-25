@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cje4siaycxq73"]
+[gd_scene load_steps=30 format=3 uid="uid://cje4siaycxq73"]
 
 [ext_resource type="PackedScene" uid="uid://qp5b68lblvj7" path="res://puzzle.tscn" id="1_4c57u"]
 [ext_resource type="Texture2D" uid="uid://ceac6m1iurrfk" path="res://platforms.png" id="1_lquwl"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://cs1h7waeesylw" path="res://scripts/card_manager.gd" id="6_7mycd"]
 [ext_resource type="AudioStream" uid="uid://dduwqm5p2sid3" path="res://sound/01_Power down_v1.wav" id="6_272bh"]
 [ext_resource type="Texture2D" uid="uid://b6iuagxu2w8i2" path="res://images/bubble.png" id="8_efxa6"]
+[ext_resource type="Texture2D" uid="uid://bjceknsklv42t" path="res://images/light.png" id="9_cegan"]
 [ext_resource type="Texture2D" uid="uid://cvwuqrcaiu7v7" path="res://images/cards/bubble_card.png" id="10_w48qg"]
 [ext_resource type="Texture2D" uid="uid://b144hfnuduhd8" path="res://images/cards/card.png" id="10_ycdy4"]
 [ext_resource type="AudioStream" uid="uid://cesg3gmxtiquk" path="res://sound/bubble-pop-06-351337.mp3" id="12_dg77c"]
@@ -157,6 +158,15 @@ texture_filter = 1
 position = Vector2(-187, -30)
 texture = ExtResource("8_efxa6")
 
+[node name="PointLight2D" type="PointLight2D" parent="Player"]
+position = Vector2(-187, -31.000004)
+scale = Vector2(0.19683906, 0.11894966)
+range_layer_min = -100
+shadow_enabled = true
+shadow_color = Color(0.65096724, 0.76674867, 0.7435895, 0)
+texture = ExtResource("9_cegan")
+texture_scale = 5.28
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
@@ -215,6 +225,7 @@ text = "Active Card: None"
 stream = ExtResource("6_272bh")
 
 [node name="StartLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="StartScreen" type="ColorRect" parent="StartLayer"]
 anchors_preset = 15
@@ -344,9 +355,12 @@ motion_mirroring = Vector2(320, 0)
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
 texture_filter = 1
 position = Vector2(1, -54.000004)
-scale = Vector2(1.5293398, 1.7714233)
+scale = Vector2(1.6237469, 1.7788705)
 texture = ExtResource("18_074og")
 centered = false
+
+[node name="CanvasModulate" type="CanvasModulate" parent="ParallaxBackground"]
+color = Color(0.1764706, 0.1764706, 0.3019608, 1)
 
 [node name="GroundLayer" type="StaticBody2D" parent="."]
 position = Vector2(2, 68)
@@ -354,5 +368,8 @@ position = Vector2(2, 68)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GroundLayer"]
 position = Vector2(5, 147)
 shape = SubResource("WorldBoundaryShape2D_074og")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.1764706, 0.1764706, 0.3019608, 1)
 
 [connection signal="pressed" from="GameOverLayer/GameOverScreen/Button" to="Player" method="_on_button_pressed"]

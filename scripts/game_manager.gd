@@ -39,6 +39,13 @@ var card_database = {
 		"color": Color.CYAN,
 		"type": "projectile" 
 	},
+	"magic": {  
+		"damage": 25,
+		"status_effect": "",
+		"image": "res://images/cards/magic_card.png",
+		"color": Color.SKY_BLUE,
+		"type": "projectile" 
+	},
 	"bubble": {
 		"damage": 0,
 		"status_effect": "",
@@ -54,6 +61,9 @@ func select_card(type):
 	if type == "staff":
 		if player:
 			player.throw_staff()
+	if type == "magic":
+		if player:
+			player.throw_magic()
 			
 	if type == "bubble":
 		if player:

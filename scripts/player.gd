@@ -6,6 +6,7 @@ const JUMP_VELOCITY = -200.0
 var health = 10
 
 var staff_scene = preload("res://staff.tscn")
+var magic_scene = preload("res://magic.tscn")
 
 @export var puzzle : Node2D
 @onready var bubble_sprite = $BubbleSprite
@@ -65,6 +66,13 @@ func die():
 	
 func update_health_ui():
 	%HealthLabel.text = "Health: " + str(health)
+	
+func throw_magic():
+	var new_magic = magic_scene.instantiate()
+	
+	new_magic.position = position + Vector2(-115, 0)
+	
+	get_parent().add_child(new_magic)
 
 func throw_staff():
 	print("throwing staff")
