@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cje4siaycxq73"]
+[gd_scene load_steps=34 format=3 uid="uid://cje4siaycxq73"]
 
 [ext_resource type="PackedScene" uid="uid://qp5b68lblvj7" path="res://puzzle.tscn" id="1_4c57u"]
 [ext_resource type="Texture2D" uid="uid://ceac6m1iurrfk" path="res://platforms.png" id="1_lquwl"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://c5xw352o4bk3k" path="res://images/background/2.Trees_back.png" id="16_074og"]
 [ext_resource type="Texture2D" uid="uid://df2we04j707oe" path="res://images/background/3.Trees_front.png" id="17_cegan"]
 [ext_resource type="Texture2D" uid="uid://dh56vu8nltmrw" path="res://images/background/4.Ground.png" id="18_074og"]
+[ext_resource type="Script" uid="uid://cteq2nm2kax4h" path="res://day_night.gd" id="20_82xsv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mycd"]
 texture = ExtResource("1_lquwl")
@@ -102,6 +103,92 @@ animations = [{
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_074og"]
 
+[sub_resource type="Animation" id="Animation_cegan"]
+resource_name = "day_night_cycle"
+length = 24.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GlobalLight:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.16666667, 6.0666666, 12.1, 18.133333, 23.966667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.76862746, 0.5019608, 1), Color(0.1764706, 0.1764706, 0.3019608, 1), Color(1, 0.81960785, 0.7294118, 1), Color(0.9886253, 0.9886253, 0.9903585, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ParallaxBackground/CanvasModulate:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.16666666, 6.0666666, 12.133333, 18.166666, 24),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.76862746, 0.5019608, 1), Color(0.1764706, 0.1764706, 0.3019608, 1), Color(1, 0.81960785, 0.7294118, 1), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Player/PointLight2D:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 6.1, 12.166667, 18.166666),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.5, 1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_82xsv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GlobalLight:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.1764706, 0.1764706, 0.3019608, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ParallaxBackground/CanvasModulate:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.1764706, 0.1764706, 0.3019608, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Player/PointLight2D:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_getpj"]
+_data = {
+&"RESET": SubResource("Animation_82xsv"),
+&"day_night_cycle": SubResource("Animation_cegan")
+}
+
 [node name="Node2D" type="Node2D"]
 
 [node name="puzzle" parent="." instance=ExtResource("1_4c57u")]
@@ -161,6 +248,7 @@ texture = ExtResource("8_efxa6")
 [node name="PointLight2D" type="PointLight2D" parent="Player"]
 position = Vector2(-187, -31.000004)
 scale = Vector2(0.19683906, 0.11894966)
+energy = 0.5
 range_layer_min = -100
 shadow_enabled = true
 shadow_color = Color(0.65096724, 0.76674867, 0.7435895, 0)
@@ -225,7 +313,6 @@ text = "Active Card: None"
 stream = ExtResource("6_272bh")
 
 [node name="StartLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="StartScreen" type="ColorRect" parent="StartLayer"]
 anchors_preset = 15
@@ -369,7 +456,14 @@ position = Vector2(2, 68)
 position = Vector2(5, 147)
 shape = SubResource("WorldBoundaryShape2D_074og")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
+[node name="GlobalLight" type="CanvasModulate" parent="."]
 color = Color(0.1764706, 0.1764706, 0.3019608, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_getpj")
+}
+autoplay = "day_night_cycle"
+script = ExtResource("20_82xsv")
 
 [connection signal="pressed" from="GameOverLayer/GameOverScreen/Button" to="Player" method="_on_button_pressed"]

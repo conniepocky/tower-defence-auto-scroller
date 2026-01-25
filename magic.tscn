@@ -151,6 +151,8 @@ frame_progress = 0.8773228
 shape = SubResource("RectangleShape2D_sxt0a")
 
 [node name="PointLight2D" type="PointLight2D" parent="MagicProjectile"]
+color = Color(1, 0.67058825, 1, 1)
+energy = 0.5
 range_layer_min = -100
 texture = ExtResource("32_a2puq")
 
