@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://j2iaw24qhl1q"
+path="res://.godot/imported/02_Game Start_v2.wav-f185733b8a9a829ca06da63eaafae22d.sample"
+
+[deps]
+
+source_file="res://sound/02_Game Start_v2.wav"
+dest_files=["res://.godot/imported/02_Game Start_v2.wav-f185733b8a9a829ca06da63eaafae22d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
