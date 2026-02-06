@@ -141,7 +141,7 @@ func _on_tutorial_button_pressed():
 	get_tree().paused = true
 	
 # autoscrolling and start screen setup
-	
+
 func _process(delta):	
 	if start_screen.visible:
 		if Input.is_action_just_pressed("ui_accept"): # spacebar

@@ -1,6 +1,6 @@
 extends Marker2D
 
-var enemy_scene = preload("res://Enemy.tscn")
+var enemy_scene = preload("res://enemy.tscn")
 var healer_scene = preload("res://healer.tscn")
 var healer_spawn_interval = 18.0
 var enemy_spawn_interval = 2.0
